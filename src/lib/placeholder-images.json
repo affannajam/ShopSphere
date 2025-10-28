@@ -1,0 +1,52 @@
+{
+  "placeholderImages": [
+    {
+      "id": "prod1",
+      "description": "A modern wireless headphone.",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1678099940967-73fe30680949?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880",
+      "imageHint": "wireless headphones"
+    },
+    {
+      "id": "prod2",
+      "description": "A stylish leather jacket.",
+      "imageUrl": "https://images.unsplash.com/photo-1727515546577-f7d82a47b51d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=736",
+      "imageHint": "leather jacket"
+    },
+    {
+      "id": "prod3",
+      "description": "A best-selling fantasy novel.",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1671379456866-57e60cf76bb7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=689",
+      "imageHint": "fantasy book"
+    },
+    {
+      "id": "prod4",
+      "description": "A minimalist ceramic vase.",
+      "imageUrl": "https://images.unsplash.com/photo-1644176041496-393d63975fba?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=765",
+      "imageHint": "ceramic vase"
+    },
+    {
+      "id": "prod5",
+      "description": "A high-performance gaming mouse.",
+      "imageUrl": "https://images.unsplash.com/photo-1605773527852-c546a8584ea3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1074",
+      "imageHint": "gaming mouse"
+    },
+    {
+      "id": "prod6",
+      "description": "A comfortable cotton t-shirt.",
+      "imageUrl": "https://images.unsplash.com/photo-1759572095384-1a7e646d0d4f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=627",
+      "imageHint": "cotton t-shirt"
+    },
+    {
+      "id": "prod7",
+      "description": "A comprehensive cookbook.",
+      "imageUrl": "https://images.unsplash.com/photo-1748017185912-c2a467989758?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=765",
+      "imageHint": "cookbook"
+    },
+    {
+      "id": "prod8",
+      "description": "A smart LED lamp.",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1672166939591-b2547bd18fca?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=627",
+      "imageHint": "smart lamp"
+    }
+  ]
+}

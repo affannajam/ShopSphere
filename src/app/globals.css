@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 275 100% 25.1%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 282.5 100% 41.4%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 1.0rem;
+  }
+ 
+  .dark {
+    --background: 0 0% 13.3%;
+    --foreground: 210 40% 98%;
+    --card: 0 0% 15%;
+    --card-foreground: 210 40% 98%;
+    --popover: 0 0% 13.3%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 275 100% 25.1%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 282.5 100% 41.4%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 22.5%;
+    --input: 217.2 32.6% 22.5%;
+    --ring: 282.5 100% 51.4%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .animated-gradient {
+    background: linear-gradient(-45deg, hsl(14, 74%, 52%), #ffd2b2, #ffd5b7, hsl(279, 89%, 52%));
+    background-size: 400% 400%;
+    animation: gradient;
+  }
+  
+  .animated-hero-gradient {
+    background: linear-gradient(-45deg, #000000, #ff7300, #ff4500, #000000);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  .animated-text-gradient {
+    background: linear-gradient(-45deg, #8a2be2, #ffffff, #8a2be2, #ffffff);
+    background-size: 300% 300%;
+    animation: gradient 8s ease-in-out infinite;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shuffle-1 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  20% { transform: translate(10px, -5px) rotate(3deg); }
+  40% { transform: translate(-5px, 10px) rotate(-2deg); }
+  60% { transform: translate(5px, 5px) rotate(5deg); }
+  80% { transform: translate(10px, -10px) rotate(-4deg); }
+}
+
+@keyframes shuffle-2 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  20% { transform: translate(-10px, 8px) rotate(-4deg); }
+  40% { transform: translate(5px, -12px) rotate(2deg); }
+  60% { transform: translate(-8px, -6px) rotate(5deg); }
+  80% { transform: translate(12px, 10px) rotate(-2deg); }
+}
+
+@keyframes shuffle-3 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  20% { transform: translate(8px, -10px) rotate(-2deg); }
+  40% { transform: translate(-10px, -5px) rotate(4deg); }
+  60% { transform: translate(12px, 5px) rotate(-5deg); }
+  80% { transform: translate(-5px, 12px) rotate(3deg); }
+}
+
+@keyframes custom-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-30px); }
+  60% { transform: translateY(-15px); }
+  90% { transform: translateY(0); } /* Pause at the bottom */
+}

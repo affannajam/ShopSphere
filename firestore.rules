@@ -1,0 +1,68 @@
+/**
+ * @fileoverview Firestore Security Rules for ShopSphere e-commerce platform.
+ *
+ * Core Philosophy:
+ * This ruleset enforces a strict user-ownership model for user profiles and shopping carts.
+ * Only authenticated users can access their own data.
+ *
+ * Data Structure:
+ * - /users/{userId}: Stores user profiles, accessible only to the user themselves.
+ * - /users/{userId}/carts/{cartId}: Stores user-specific shopping carts, accessible only to the owning user.
+ *
+ * Key Security Decisions:
+ * - Users can only access their own user document and their own cart.
+ * - No user listing is allowed.
+ * - Cart data is stored in a subcollection of the user's document, enforcing ownership via path.
+ *
+ * Denormalization for Authorization:
+ * The `userId` is available in the path for cart data. Therefore no denormalization is needed.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Enforces access control for user profiles. Only the authenticated user can read and write their own profile.
+     * @path /users/{userId}
+     * @allow (get, update, delete) if the request is made by the user with ID {userId}.
+     * @allow (create) if the authenticated user's ID matches {userId}.
+     * @deny (get, update, delete) if the request is made by a different user or an unauthenticated user.
+     * @deny (create) if the authenticated user's ID does not match {userId}.
+     * @principle Enforces document ownership for all operations on user profiles.
+     */
+    match /users/{userId} {
+      function isOwner(userId) {
+        return request.auth.uid == userId;
+      }
+      function isSignedIn() {
+        return request.auth != null;
+      }
+      allow get: if isSignedIn() && isOwner(userId);
+      allow list: if false;
+      allow create: if isSignedIn() && isOwner(userId);
+      allow update: if isSignedIn() && isOwner(userId);
+      allow delete: if isSignedIn() && isOwner(userId);
+    }
+
+    /**
+     * @description Enforces access control for user shopping carts. Only the authenticated user can read and write their own cart.
+     * @path /users/{userId}/carts/{cartId}
+     * @allow (get, create, update, delete) if the request is made by the user with ID {userId}.
+     * @deny (get, create, update, delete) if the request is made by a different user or an unauthenticated user.
+     * @principle Enforces document ownership for all operations on user shopping carts.
+     */
+    match /users/{userId}/carts/{cartId} {
+      function isOwner(userId) {
+        return request.auth.uid == userId;
+      }
+      function isSignedIn() {
+        return request.auth != null;
+      }
+      allow get: if isSignedIn() && isOwner(userId);
+      allow list: if isSignedIn() && isOwner(userId);
+      allow create: if isSignedIn() && isOwner(userId);
+      allow update: if isSignedIn() && isOwner(userId);
+      allow delete: if isSignedIn() && isOwner(userId);
+    }
+  }
+}

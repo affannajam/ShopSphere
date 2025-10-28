@@ -1,0 +1,116 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the ShopSphere e-commerce platform.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user entity."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user.",
+          "format": "email"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user."
+        },
+        "registrationDate": {
+          "type": "string",
+          "description": "Date and time the user registered.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "firstName",
+        "lastName",
+        "registrationDate"
+      ]
+    },
+    "Cart": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Cart",
+      "type": "object",
+      "description": "Represents the user's shopping cart.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the cart entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:1 Cart)"
+        },
+        "cartItems": {
+          "type": "array",
+          "description": "An array of cart items.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "cartItems"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Collection to store user profiles.  This collection is path based and designed for private User data.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/carts/{cartId}",
+        "definition": {
+          "entityName": "Cart",
+          "schema": {
+            "$ref": "#/backend/entities/Cart"
+          },
+          "description": "Subcollection to store user carts. The cart is owned by the user, so the userId comes from path. No denormalization is needed.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            },
+            {
+              "name": "cartId",
+              "description": "The unique identifier for the cart."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to save the user's cart data, associating it with their unique user ID. This structure prioritizes authorization independence and enables efficient data retrieval and management. We're using path-based ownership for the cart, directly under the user's document. This avoids the need for `get()` calls in security rules, as the user ID is directly available in the path. Also, it makes rules easier to understand and maintain.\n\nSpecifically, the `carts` subcollection is placed under the `/users/{userId}` path. This ensures that each user has their own dedicated cart, and access to the cart is restricted to the authenticated user only. The `userId` field within the cart document is redundant given the path-based ownership. However, it is included for data clarity.\n\nThis structure also ensures that list operations will only return carts owned by the currently authenticated user (QAPs), because the rule is based on path-ownership."
+  }
+}
